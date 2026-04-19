@@ -1,0 +1,234 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Monitor, 
+  Smartphone, 
+  Layout, 
+  Send, 
+  Github, 
+  Linkedin, 
+  ArrowUpRight,
+  Menu,
+  X,
+  Palette,
+  Layers,
+  MousePointer2
+} from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const projects = [
+    {
+      title: "FinTech Dashboard",
+      category: "UI/UX & Web Design",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+      description: "복잡한 금융 데이터를 직관적으로 시각화한 대시보드 프로젝트입니다.",
+      tags: ["Figma", "React", "Data Viz"]
+    },
+    {
+      title: "Eco-Friendly App",
+      category: "Mobile App Design",
+      image: "https://images.unsplash.com/photo-1512428559087-560ad5ceab42?auto=format&fit=crop&q=80&w=800",
+      description: "지속 가능한 소비를 돕는 커뮤니티 기반의 모바일 앱 서비스입니다.",
+      tags: ["Mobile", "UX Strategy", "Prototyping"]
+    },
+    {
+      title: "Minimal E-Commerce",
+      category: "Branding & UI",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+      description: "미니멀리즘을 극대화한 라이프스타일 브랜드의 이커머스 솔루션입니다.",
+      tags: ["Brand Identity", "E-Commerce", "UI Design"]
+    },
+    {
+      title: "AI Chat Interface",
+      category: "Product Design",
+      image: "https://images.unsplash.com/photo-1531746790731-6c2079ee0638?auto=format&fit=crop&q=80&w=800",
+      description: "사용자 경험을 최우선으로 고려한 인공지능 대화형 인터페이스입니다.",
+      tags: ["AI/ML", "Conversational UI", "UX Research"]
+    }
+  ];
+
+  const services = [
+    { icon: <Monitor className="w-6 h-6" />, title: "Web Design", desc: "반응형 웹과 웹 앱의 완성도 높은 비주얼을 설계합니다." },
+    { icon: <Smartphone className="w-6 h-6" />, title: "App Design", desc: "iOS/Android 환경에 최적화된 모바일 경험을 구축합니다." },
+    { icon: <Layers className="w-6 h-6" />, title: "Design System", desc: "일관성 있고 확장 가능한 컴포넌트 라이브러리를 제작합니다." },
+    { icon: <MousePointer2 className="w-6 h-6" />, title: "Interaction", desc: "사용자의 행동을 유도하는 매끄러운 애니메이션을 설계합니다." }
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-purple-500 selection:text-white">
+      {/* Navigation */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <a href="#" className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity">
+            DESIGNER<span className="text-purple-500">.</span>
+          </a>
+          
+          <div className="hidden md:flex space-x-12 text-sm font-medium uppercase tracking-widest text-gray-400">
+            <a href="#work" className="hover:text-white transition-colors">Work</a>
+            <a href="#about" className="hover:text-white transition-colors">About</a>
+            <a href="#services" className="hover:text-white transition-colors">Services</a>
+            <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+          </div>
+
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-white">
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 py-8 px-6 flex flex-col space-y-6 md:hidden">
+            <a href="#work" onClick={() => setIsMenuOpen(false)} className="text-lg">Work</a>
+            <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-lg">About</a>
+            <a href="#services" onClick={() => setIsMenuOpen(false)} className="text-lg">Services</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-lg">Contact</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="inline-block px-4 py-1.5 mb-6 border border-purple-500/30 rounded-full bg-purple-500/5 text-purple-400 text-xs font-bold tracking-widest uppercase animate-pulse">
+            Available for freelance projects
+          </div>
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[0.9]">
+            Designing <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Digital</span> Experiences.
+          </h1>
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+            저는 사용자 중심의 사고방식으로 비즈니스의 문제를 해결하고, 
+            아름다움과 기능이 공존하는 인터페이스를 설계하는 UXUI 디자이너입니다.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <a href="#work" className="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300">
+              Selected Work
+            </a>
+            <a href="#contact" className="px-8 py-4 bg-transparent border border-white/20 font-bold rounded-full hover:border-white transition-all duration-300">
+              Get in Touch
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Bento Grid Projects */}
+      <section id="work" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-sm font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">Portfolio</h2>
+              <p className="text-4xl md:text-5xl font-bold tracking-tight">Selected Work</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project, idx) => (
+              <div key={idx} className="group relative overflow-hidden rounded-3xl bg-[#151515] border border-white/5 cursor-pointer">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <span className="text-xs text-purple-400 font-bold uppercase tracking-widest mb-2 block">{project.category}</span>
+                      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                      <p className="text-gray-400 text-sm leading-relaxed">{project.description}</p>
+                    </div>
+                    <div className="p-3 bg-white/5 rounded-full group-hover:bg-purple-500 group-hover:text-white transition-colors duration-300">
+                      <ArrowUpRight className="w-5 h-5" />
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-4">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="text-[10px] px-2 py-1 rounded bg-white/5 text-gray-400 border border-white/10 uppercase font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20 px-6 bg-[#0d0d0d]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-1">
+              <h2 className="text-sm font-bold text-purple-500 uppercase tracking-[0.2em] mb-4">What I do</h2>
+              <p className="text-3xl font-bold mb-6">Expertise & Services</p>
+              <div className="h-1 w-12 bg-purple-500"></div>
+            </div>
+            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {services.map((s, idx) => (
+                <div key={idx} className="p-8 rounded-3xl border border-white/5 bg-[#111] hover:border-purple-500/50 transition-colors duration-300 group">
+                  <div className="mb-6 p-4 bg-white/5 rounded-2xl inline-block group-hover:bg-purple-500/10 group-hover:text-purple-500 transition-colors">
+                    {s.icon}
+                  </div>
+                  <h4 className="text-xl font-bold mb-4">{s.title}</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About / Contact CTA */}
+      <section id="contact" className="py-32 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl md:text-7xl font-bold mb-12 leading-tight">
+            함께 멋진 미래를 <br/> 설계해 볼까요?
+          </h2>
+          <div className="inline-flex items-center justify-center p-1 border border-white/10 rounded-full bg-white/5 mb-12">
+            <span className="pl-6 pr-4 py-3 text-lg font-medium">hello@uxuidesigner.com</span>
+            <button className="p-4 bg-white text-black rounded-full hover:bg-purple-500 hover:text-white transition-all">
+              <Send className="w-6 h-6" />
+            </button>
+          </div>
+          
+          <div className="flex justify-center space-x-8 text-gray-400">
+            <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
+              <Github className="w-5 h-5" /> GitHub
+            </a>
+            <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
+              <Linkedin className="w-5 h-5" /> LinkedIn
+            </a>
+            <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
+              <Palette className="w-5 h-5" /> Dribbble
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t border-white/5 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:row justify-between items-center gap-6">
+          <p className="text-gray-500 text-sm">© 2026 Designed by UXUI Professional. All rights reserved.</p>
+          <div className="flex space-x-8 text-xs font-bold uppercase tracking-widest text-gray-500">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
